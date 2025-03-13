@@ -64,7 +64,7 @@ try:
         non_error_markdown_output = "\n".join(non_error_markdown_lines)
 
         # NON_ERROR.md 파일을 folder_path에 저장 (UTF-8 인코딩)
-        non_error_file_path = folder_path + 'log_analysis.md'
+        non_error_file_path = folder_path + 'non_error_log_analysis.md'
         with open(non_error_file_path, 'w', encoding='utf-8') as non_error_file:
             non_error_file.write(non_error_markdown_output)
 
