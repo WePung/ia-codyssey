@@ -21,6 +21,8 @@ try:
         # splitlines() 함수로 읽어온 파일을 줄넘김 단위로 list에 추가
         lines = file.read().splitlines()
 
+        print(lines)
+
         # 리스트 역순 정렬
         reversed_lines = lines[::-1]
 
