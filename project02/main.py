@@ -1,5 +1,6 @@
 import csv
 import os
+import pickle
 
 # 현재 파일 경로를 저장(__file__를 통해 현재 파일 경로 문자열 저장)
 current_file_path = __file__
@@ -42,16 +43,22 @@ try:
         for item in filtered_list:
             print(item)
 
-        # Define the output file name
-        output_file = 'Mars_Base_Inventory_danger.csv'
+        # Define the output binary file name and path
+        output_bin_file = os.path.join(folder_path, 'Mars_Base_Inventory_List.bin')
 
-        # Write the filtered list to the CSV file
-        with open(output_file, 'w', newline='', encoding='utf-8-sig') as file:
-            writer = csv.writer(file)
-            writer.writerow(['Substance', 'Weight', 'Specific Gravity', 'Strength', 'Flammability'])  # Header row
-            writer.writerows(filtered_list)
+        # Write the filtered list to the binary file
+        with open(output_bin_file, 'wb') as bin_file:
+            pickle.dump(filtered_list, bin_file)
 
-        print(f"데이터가 '{output_file}' 파일로 성공적으로 출력되었습니다.")
+        print(f"데이터가 '{output_bin_file}' 파일로 성공적으로 저장되었습니다.")
+
+        # Read the binary file and print its contents
+        with open(output_bin_file, 'rb') as bin_file:
+            loaded_list = pickle.load(bin_file)
+
+        print("\n--------이진 파일에서 읽은 데이터 출력--------")
+        for item in loaded_list:
+            print(item)
 
 except FileNotFoundError:
     print(f"파일 '{file_path}'을 찾을 수 없습니다.")
