@@ -43,16 +43,16 @@ try:
         for item in filtered_list:
             print(item)
 
-        # Define the output binary file name and path
+        # 이진법 파일을 내보낼 파일 위치 및 이름 선정
         output_bin_file = os.path.join(folder_path, 'Mars_Base_Inventory_List.bin')
 
-        # Write the filtered list to the binary file
+        # 이진법 파일로 내보내기
         with open(output_bin_file, 'wb') as bin_file:
             pickle.dump(filtered_list, bin_file)
 
         print(f"데이터가 '{output_bin_file}' 파일로 성공적으로 저장되었습니다.")
 
-        # Read the binary file and print its contents
+        # 내보낸 이진법 파일을 다시 읽기
         with open(output_bin_file, 'rb') as bin_file:
             loaded_list = pickle.load(bin_file)
 
