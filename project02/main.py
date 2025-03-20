@@ -47,7 +47,7 @@ try:
 
         # 이진법 파일로 내보내기
         with open(output_bin_file, 'wb') as bin_file:
-            # pickle 대신 bytes로 변환하여 저장
+            # CSV 데이터를 바이트로 변환하여 저장
             for item in filtered_list:
                 bin_file.write(','.join(item).encode('utf-8') + b'\n')
 
