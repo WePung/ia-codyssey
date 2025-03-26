@@ -1,3 +1,6 @@
+import random
+import datetime
+
 class DummySensor:
     def __init__(self):
         self.env_values = {
@@ -11,16 +14,16 @@ class DummySensor:
 
     def set_env(self):
         # 내장 기능만 사용하여 간단한 "랜덤" 숫자 생성 (실제로는 랜덤이 아님)
-        self.env_values['mars_base_internal_temperature'] = 20 + (id(self) % 12)
-        self.env_values['mars_base_external_temperature'] = 10 + (id(self) % 11)
-        self.env_values['mars_base_internal_humidity'] = 55 + (id(self) % 5)
-        self.env_values['mars_base_external_illuminance'] = 600 + (id(self) % 115)
-        self.env_values['mars_base_internal_co2'] = 0.05 + (id(self) % 8) / 1000
-        self.env_values['mars_base_internal_oxygen'] = 5 + (id(self) % 2)
-
+        self.env_values['mars_base_internal_temperature'] = random.randint(18,30)
+        self.env_values['mars_base_external_temperature'] = random.randint(0,21)
+        self.env_values['mars_base_internal_humidity'] = random.randint(50,60)
+        self.env_values['mars_base_external_illuminance'] = random.randint(500,715)
+        self.env_values['mars_base_internal_co2'] = random.uniform(0.02,0.1)
+        self.env_values['mars_base_internal_oxygen'] = random.randint(4,7)
+        
+    # 고정된 시간 사용
     def get_current_time(self):
-        # 고정된 시간 사용
-        return "2024-03-23 14:30:00"
+        return datetime.datetime.now()
 
     def get_env(self):
         current_time = self.get_current_time()
