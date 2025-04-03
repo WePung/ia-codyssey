@@ -47,26 +47,17 @@ def main():
         ds.set_env()
         mc.get_sensor_data()
 
-        # 사용자 입력 대기 (5초 제한)
+        # 사용자 입력 대기 (카운트다운 출력)
         print("\n[5초 동안 입력 대기] 'q' 입력 시 종료:")
         
-        user_input = None
-        start_time = time.time()
-
         for remaining_time in range(5, 0, -1):  # 카운트다운 (5초 -> 1초)
             print(f"남은 시간: {remaining_time}초")
-            time.sleep(1)  # 초마다 대기
-            
-            if time.time() - start_time >= remaining_time:  # 남은 시간이 지나면 입력 대기 시작
-                user_input = input("입력: ")
-                if user_input:
-                    break
+            time.sleep(1)
 
-        # 입력 처리 (시간 초과 시 공백으로 간주)
-        if not user_input:
-            print("⚠️ 입력 없음: 공백으로 간주합니다.")
-            user_input = " "  # 공백으로 처리
-        
+        # 카운트다운이 끝난 후 입력 받기
+        user_input = input("입력: ")
+
+        # 입력 처리
         if user_input == "q":
             print("Terminating program...")
             break
