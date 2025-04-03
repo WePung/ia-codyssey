@@ -43,14 +43,14 @@ class MissionComputer:
 
 def main():
     ds = DummySensor()
-    mc = MissionComputer()
+    RunComputer = MissionComputer()
     count = 0  # 카운트 초기화
     print("System started. Press 'q' to quit.")
 
     while True:
         # 센서 데이터 업데이트 및 로깅
         ds.set_env()
-        mc.get_sensor_data()
+        RunComputer.get_sensor_data()
         count += 1
 
         # 60번(300초) 마다 평균 계산
