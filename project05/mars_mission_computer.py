@@ -38,34 +38,6 @@ class MissionComputer:
         except Exception as e:
             return json.dumps({'Error': str(e)}, indent=4)
 
-    # 메모리 크기 계산 (GB 단위)
-    def _get_memory_size(self):
-        """Calculate total memory size in GB."""
-        if platform.system() == 'Windows':
-            import ctypes
-            kernel32 = ctypes.windll.kernel32
-            c_ulong = ctypes.c_ulong
-
-            class MEMORYSTATUSEX(ctypes.Structure):
-                _fields_ = [
-                    ("dwLength", c_ulong),
-                    ("dwMemoryLoad", c_ulong),
-                    ("ullTotalPhys", ctypes.c_ulonglong),
-                    ("ullAvailPhys", ctypes.c_ulonglong),
-                    ("ullTotalPageFile", ctypes.c_ulonglong),
-                    ("ullAvailPageFile", ctypes.c_ulonglong),
-                    ("ullTotalVirtual", ctypes.c_ulonglong),
-                    ("ullAvailVirtual", ctypes.c_ulonglong),
-                    ("ullAvailExtendedVirtual", ctypes.c_ulonglong)
-                ]
-
-            memory_status = MEMORYSTATUSEX()
-            memory_status.dwLength = ctypes.sizeof(MEMORYSTATUSEX)
-            kernel32.GlobalMemoryStatusEx(ctypes.byref(memory_status))
-            return round(memory_status.ullTotalPhys / (1024 ** 3), 2)  # GB 단위로 변환
-        else:
-            return round(os.sysconf('SC_PAGE_SIZE') * os.sysconf('SC_PHYS_PAGES') / (1024 ** 3), 2)  # Linux/Unix
-
 # 클래스 인스턴스 생성 및 테스트
 if __name__ == "__main__":
     runComputer = MissionComputer()
